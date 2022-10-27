@@ -24,6 +24,7 @@ public class SysRoleController {
     @ApiOperation("查询所有记录")
     @GetMapping("findAll")
     public Result findAllRole(){
+        System.out.println(1/0);
         List<SysRole> list = sysRoleService.list();
         return Result.ok(list);
     }
