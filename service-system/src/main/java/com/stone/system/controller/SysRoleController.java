@@ -1,6 +1,7 @@
 package com.stone.system.controller;
 
 import com.stone.model.system.SysRole;
+import com.stone.result.Result;
 import com.stone.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,15 +20,19 @@ public class SysRoleController {
 
     @ApiOperation("查询所有记录")
     @GetMapping("findAll")
-    public List<SysRole> findAllRole(){
+    public Result findAllRole(){
         List<SysRole> list = sysRoleService.list();
-        return list;
+        return Result.ok(list);
     }
 
     @ApiOperation("逻辑删除接口")
     @DeleteMapping("remove/{id}")
-    public boolean removeRoleById(@PathVariable Long id){
+    public Result removeRoleById(@PathVariable Long id){
         boolean isSuccess = sysRoleService.removeById(id);
-        return isSuccess;
+        if(isSuccess){
+            return Result.ok();
+        }else {
+            return Result.fail();
+        }
     }
 }
