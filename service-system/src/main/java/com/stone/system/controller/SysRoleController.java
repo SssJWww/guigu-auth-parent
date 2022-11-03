@@ -3,6 +3,7 @@ package com.stone.system.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stone.model.system.SysRole;
+import com.stone.model.vo.AssginRoleVo;
 import com.stone.model.vo.SysRoleQueryVo;
 import com.stone.result.Result;
 import com.stone.system.service.SysRoleService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "角色管理接口")
 @RestController
@@ -91,5 +93,19 @@ public class SysRoleController {
         }else {
             return Result.fail();
         }
+    }
+
+    @ApiOperation("获取用户的角色数据")
+    @GetMapping("toAssign/{userId}")
+    public Result assign(@PathVariable Long userId){
+        Map<String,Object> roleMap = sysRoleService.getRolesById(userId);
+        return Result.ok(roleMap);
+    }
+
+    @ApiOperation("用户分配角色")
+    @PostMapping("doAssign")
+    public Result doAssign(@RequestBody AssginRoleVo assginRoleVo){
+        sysRoleService.doAssign(assginRoleVo);
+        return null;
     }
 }

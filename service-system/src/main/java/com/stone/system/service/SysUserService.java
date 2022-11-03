@@ -1,7 +1,11 @@
 package com.stone.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stone.model.system.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.stone.model.vo.SysRoleQueryVo;
+import com.stone.model.vo.SysUserQueryVo;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    IPage<SysUser> selectPage(Page<SysUser> pageParam, SysUserQueryVo sysUserQueryVo);
+
+    void updateStatus(Long id, Integer status);
 }
