@@ -52,7 +52,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         //封装到Map集合
         Map<String,Object> map = new HashMap<>();
         map.put("allRoles",roles);
-        map.put("userRolesId",userRolesIds);
+        map.put("userRoleIds",userRolesIds);
         return map;
     }
 
