@@ -2,6 +2,7 @@ package com.stone.system.controller;
 
 
 import com.stone.model.system.SysMenu;
+import com.stone.model.vo.AssginMenuVo;
 import com.stone.result.Result;
 import com.stone.system.service.SysMenuService;
 import io.swagger.annotations.Api;
@@ -64,6 +65,21 @@ public class SysMenuController {
     public Result remove(@PathVariable Long id) {
         sysMenuService.removeMenuById(id);
         return Result.ok();
+    }
+
+    @ApiOperation("根据角色获取菜单")
+    @GetMapping("/toAssign/{roleId}")
+    public Result toAssign(@PathVariable Long roleId) {
+        List<SysMenu> list = sysMenuService.findMenuByRoleId(roleId);
+        return Result.ok(list);
+    }
+
+    @ApiOperation("给角色分配菜单的权限")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginMenuVo assignMenuVo) {
+        sysMenuService.doAssign(assignMenuVo);
+        return Result.ok();
+
     }
 }
 
